@@ -23,7 +23,7 @@ public void setLogin(String login) {this.login = login;}
 public String Senha() {return senha;}
 public void setSenha(String senha) {this.senha = senha;}
 
-public String Cargo() {return cargo;}
+public String getCargo() {return cargo;}
 public void setCargo(String cargo) {this.cargo = cargo;}
 }
 
