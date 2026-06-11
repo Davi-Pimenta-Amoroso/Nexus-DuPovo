@@ -33,8 +33,17 @@ public class LoginView extends JFrame {
             Usuario usuarioLogado = controller.autenticar(login, senha);
             if (usuarioLogado != null) {
                 String mensagem = "Bem Vindo - Nexus ERP - DuPovo " + usuarioLogado.getNome() + " (" + usuarioLogado.getCargo() + ")!";
+                
+                // Corrigido aqui para usar 'mensagem' em português
                 JOptionPane.showMessageDialog(null, mensagem);
+                
+                // Fecha a tela de login
                 this.dispose();
+                
+                // Abre a TelaPrincipal
+                br.com.nexus.dupovo.erp.view.TelaPrincipal telaPrincipal = new br.com.nexus.dupovo.erp.view.TelaPrincipal();
+                telaPrincipal.setVisible(true);
+                
             } else {
                 JOptionPane.showMessageDialog(null, "Login inválido. Tente novamente.", "Erro", JOptionPane.ERROR_MESSAGE);
             }
