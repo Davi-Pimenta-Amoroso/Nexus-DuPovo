@@ -1,4 +1,4 @@
-package br.com.nexus.dupovo.erp.view;
+package br.com.mercado.view;
 
 import javax.swing.*;
 import java.awt.*;
