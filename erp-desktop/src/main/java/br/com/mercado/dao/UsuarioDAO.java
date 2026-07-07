@@ -4,7 +4,7 @@ import br.com.mercado.model.Usuario;
 import java.sql.*;
 
 public class UsuarioDAO {
-    
+    private static final boolean MODO_MOCK = true;
     private Connection getConnection() throws SQLException {
         String url = "jdbc:mysql://localhost:3306/mercado";
         String user = "root";
@@ -12,6 +12,26 @@ public class UsuarioDAO {
         return DriverManager.getConnection(url, user, password);
     }
     public Usuario buscarPorLoginESenha(String login, String senha) {
+        if (MODO_MOCK) {
+            return buscarMock(login, senha);
+        }
+        return buscarNoBanco(login, senha);
+    }
+
+    private Usuario buscarMock(String login, String senha) {
+        if (login.equals("admin") && senha.equals("1234")) {
+            Usuario usuario = new Usuario();
+            usuario.setId(1L);
+            usuario.setNome("Administrador");
+            usuario.setLogin("admin");
+            usuario.setSenha("1234");
+            usuario.setCargo("Gerente");
+            return usuario;
+        }
+        return null;
+    }
+
+    private Usuario buscarNoBanco(String login, String senha){
         String sql = "SELECT * FROM usuarios WHERE login  = ? AND senha = ?";
         try (Connection conn = getConnection();
             PreparedStatement ps = conn.prepareStatement(sql)){
