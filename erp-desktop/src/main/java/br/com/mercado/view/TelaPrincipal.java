@@ -78,4 +78,46 @@ public class TelaPrincipal extends JFrame {
             new TelaPrincipal().setVisible(true);
         });
     }
+
+    private JDesktopPane desktop;
+
+    public TelaPrincipal() {
+        desktop = new JDesktopPane();
+        desktop.setBackground(new Color(220, 225, 230));
+        setContentPane(desktop);
+
+        criarMenu();
+    }
+
+    private void criarMenu() {
+        JMenuBar barraMenu = new JMenuBar();
+
+        JMenu menuCadastros = new JMenu("Cadastros");
+        JMenuItem itemProdutos = new JMenuItem("Produtos");
+        JMenuItem itemFuncionarios = new JMenuItem("Funcionários");
+
+        menuCadastros.add(itemProdutos);
+        menuCadastros.add(itemFuncionarios);
+
+        JMenu menuSistema = new JMenu("Sistema");
+        JMenuItem itemSair = new JMenuItem("sair");
+        menuSistema.add(itemSair);
+
+        barraMenu.add(menuCadastros);
+        barraMenu.add(menuSistema);
+        setJMenuBar(barraMenu);
+
+        itemProdutos.addActionListener(e -> {
+            CadastroProdutoInternalFrame telaProd = new CadastroProdutoInternalFrame();
+            desktop.add(telaProd);
+            telaProd.setVisible(true);
+        });
+
+        itemSair.addActionListener(e -> {
+            int confirm = JOptionPane.showConfirmDialog(this, "Deseja realmente sair?", "Confirmar", JOptionPane.YES_NO_OPTION);
+            if (confirm == JOptionPane.YES_OPTION) {
+                System.exit(0);
+            }
+        });
+    }
 }

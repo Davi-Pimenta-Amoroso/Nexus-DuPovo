@@ -1,6 +1,6 @@
 package br.com.mercado.model.Produto;
 
-public class Java {
+public class Produto {
 
     public class Produto {
         private long id;
