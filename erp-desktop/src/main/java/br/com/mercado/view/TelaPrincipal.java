@@ -2,16 +2,11 @@ package br.com.mercado.view;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class TelaPrincipal extends JFrame {
 
     private JDesktopPane desktop;
 
-    /**
-     * 
-     */
     public TelaPrincipal() {
         // Configurações da Janela Principal do Mercado DuPovo
         setTitle("Nexus ERP - Mercado DuPovo");
@@ -19,9 +14,8 @@ public class TelaPrincipal extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
-        // O JDesktopPane funciona como o painel onde flutuam os JInternalFrames
         desktop = new JDesktopPane();
-        desktop.setBackground(new Color(220, 225, 230)); 
+        desktop.setBackground(new Color(220, 225, 230));
         setContentPane(desktop);
 
         criarMenu();
@@ -34,7 +28,7 @@ public class TelaPrincipal extends JFrame {
         JMenu menuCadastros = new JMenu("Cadastros");
         JMenuItem itemProdutos = new JMenuItem("Produtos");
         JMenuItem itemFuncionarios = new JMenuItem("Funcionários");
-        
+
         menuCadastros.add(itemProdutos);
         menuCadastros.add(itemFuncionarios);
 
@@ -47,27 +41,20 @@ public class TelaPrincipal extends JFrame {
         barraMenu.add(menuSistema);
         setJMenuBar(barraMenu);
 
-     // Abre a tela que o Davi criou dentro do painel principal
-        itemProdutos.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Código do Davi isolado temporariamente para não dar erro
-                /*
-                try {
-                    CadastroProdutoInternalFrame telaProd = new CadastroProdutoInternalFrame();
-                    telaProd.setVisible(true);
-                    desktop.add(telaProd);
-                } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, "Erro ao abrir tela.");
-                }
-                */
+        // Abre a tela de cadastro de produtos dentro do painel principal
+        itemProdutos.addActionListener(e -> {
+            try {
+                CadastroProdutoInternalFrame telaProd = new CadastroProdutoInternalFrame();
+                desktop.add(telaProd);
+                telaProd.setVisible(true);
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, "Erro ao abrir tela: " + ex.getMessage());
             }
         });
-            
 
-        itemSair.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+        itemSair.addActionListener(e -> {
+            int confirm = JOptionPane.showConfirmDialog(this, "Deseja realmente sair?", "Confirmar", JOptionPane.YES_NO_OPTION);
+            if (confirm == JOptionPane.YES_OPTION) {
                 System.exit(0);
             }
         });
@@ -76,48 +63,6 @@ public class TelaPrincipal extends JFrame {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             new TelaPrincipal().setVisible(true);
-        });
-    }
-
-    private JDesktopPane desktop;
-
-    public TelaPrincipal() {
-        desktop = new JDesktopPane();
-        desktop.setBackground(new Color(220, 225, 230));
-        setContentPane(desktop);
-
-        criarMenu();
-    }
-
-    private void criarMenu() {
-        JMenuBar barraMenu = new JMenuBar();
-
-        JMenu menuCadastros = new JMenu("Cadastros");
-        JMenuItem itemProdutos = new JMenuItem("Produtos");
-        JMenuItem itemFuncionarios = new JMenuItem("Funcionários");
-
-        menuCadastros.add(itemProdutos);
-        menuCadastros.add(itemFuncionarios);
-
-        JMenu menuSistema = new JMenu("Sistema");
-        JMenuItem itemSair = new JMenuItem("sair");
-        menuSistema.add(itemSair);
-
-        barraMenu.add(menuCadastros);
-        barraMenu.add(menuSistema);
-        setJMenuBar(barraMenu);
-
-        itemProdutos.addActionListener(e -> {
-            CadastroProdutoInternalFrame telaProd = new CadastroProdutoInternalFrame();
-            desktop.add(telaProd);
-            telaProd.setVisible(true);
-        });
-
-        itemSair.addActionListener(e -> {
-            int confirm = JOptionPane.showConfirmDialog(this, "Deseja realmente sair?", "Confirmar", JOptionPane.YES_NO_OPTION);
-            if (confirm == JOptionPane.YES_OPTION) {
-                System.exit(0);
-            }
         });
     }
 }
