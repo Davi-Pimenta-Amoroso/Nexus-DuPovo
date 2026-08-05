@@ -1,5 +1,6 @@
 package br.com.mercado;
 
+import javax.swing.*;
 import com.formdev.flatlaf.FlatLightLaf;
 import br.com.mercado.view.LoginView;
 

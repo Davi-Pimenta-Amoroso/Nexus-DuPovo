@@ -1,0 +1,9 @@
+br\com\mercado\model\Produto.class
+br\com\mercado\view\LoginView.class
+br\com\mercado\App.class
+br\com\mercado\view\CadastroProdutoInternalFrame.class
+br\com\mercado\view\TelaPrincipal.class
+br\com\mercado\controller\LoginController.class
+br\com\mercado\dao\ProdutoDAO.class
+br\com\mercado\model\Usuario.class
+br\com\mercado\dao\UsuarioDAO.class
